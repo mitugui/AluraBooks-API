@@ -1,6 +1,9 @@
+const fs = require("fs")
+
 function getBooks(req, res) {
     try {
-        res.send("Olá, mundo!")
+        const books = JSON.parse(fs.readFileSync("books.json"))
+        res.send(books)
     } catch (error) {
         res.status(500)
         res.send(error.message)
