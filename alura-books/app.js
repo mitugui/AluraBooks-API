@@ -2,6 +2,7 @@ const express = require("express")
 const bookRoute = require("./routes/book")
 
 const app = express()
+app.use(express.json())
 
 app.use('/books', bookRoute)
 
