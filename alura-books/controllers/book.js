@@ -38,9 +38,9 @@ function postBook(req, res) {
 function patchBook(req, res) {
     try {
         const id = req.params.id
-        const body = req.body
+        const modifications = req.body
     
-        modifyBook(body, id)
+        modifyBook(modifications, id)
         res.send("Item modificado com sucesso")
     } catch (error) {
         res.status(500)
