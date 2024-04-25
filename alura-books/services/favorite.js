@@ -1,7 +1,9 @@
 const fs = require("fs")
 
+const favorites = JSON.parse(fs.readFileSync("favorites.json"))
+
 function getAllFavorites() {
-    return JSON.parse(fs.readFileSync("favorites.json"))
+    return favorites
 }
 
 function insertFavorite(id) {
@@ -9,16 +11,13 @@ function insertFavorite(id) {
 
     const bookToInsert = books.find(book => book.id === id)
 
-    const favorites = JSON.parse(fs.readFileSync("favorites.json"))
     const newFavoritesList = [...favorites, bookToInsert]
 
     fs.writeFileSync("favorites.json", JSON.stringify(newFavoritesList))
 }
 
 function deleteFavoriteByID(id) {
-    const books = JSON.parse(fs.readFileSync("favorites.json"))
-
-    const filteredBooks = books.filter(book => book.id !== id)
+    const filteredBooks = favorites.filter(book => book.id !== id)
     fs.writeFileSync("favorites.json", JSON.stringify(filteredBooks))
 }
 
