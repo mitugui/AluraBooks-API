@@ -1,7 +1,7 @@
 const express = require("express")
 const cors = require("cors")
-const bookRoute = require("./routes/book")
-const favoriteRoute = require("./routes/favorite")
+const bookRoute = require("./src/routes/book")
+const favoriteRoute = require("./src/routes/favorite")
 
 const app = express()
 app.use(express.json())

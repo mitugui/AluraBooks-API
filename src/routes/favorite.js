@@ -1,5 +1,5 @@
 const {Router} = require("express")
-const { getFavorites, postFavorite, deleteFavorite } = require("../controllers/favorite")
+const { getFavorites, postFavorite, deleteFavorite } = require("../api/controllers/favorite")
 
 const router = Router()
 
