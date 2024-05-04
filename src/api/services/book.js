@@ -1,6 +1,9 @@
 const fs = require("fs")
+const path = require("path")
 
-const books = JSON.parse(fs.readFileSync("books.json"))
+const booksPath = path.join(__dirname, "..", "..", "..", "data", "books.json")
+
+const books = JSON.parse(fs.readFileSync(booksPath, "utf-8"))
 
 function getAllBooks() {
     return books
@@ -13,23 +16,27 @@ function getBookByID(id) {
 
 function insertBook(newBook) {
     const newBooksList = [...books, newBook]
-    fs.writeFileSync("books.json", JSON.stringify(newBooksList))
+    writeToBooksFile(newBooksList)
 }
 
 function modifyBook(modifications, id) {
-    let currentBooks = JSON.parse(fs.readFileSync("books.json"))
+    let currentBooks = books
     const modifiedIndex = currentBooks.findIndex(book => book.id === id)
 
     const changedContent = { ...currentBooks[modifiedIndex], ...modifications }
 
     currentBooks[modifiedIndex] = changedContent
 
-    fs.writeFileSync("books.json", JSON.stringify(currentBooks))
+    writeToBooksFile(currentBooks)
 }
 
 function deleteBookByID(id) {
     const filteredBooks = books.filter(book => book.id !== id)
-    fs.writeFileSync("books.json", JSON.stringify(filteredBooks))
+    writeToBooksFile(filteredBooks)
+}
+
+function writeToBooksFile(data) {
+    fs.writeFileSync(booksPath, JSON.stringify(data), "utf-8")
 }
 
 module.exports = {
